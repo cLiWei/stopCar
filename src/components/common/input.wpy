@@ -1,0 +1,68 @@
+<style lang="less" scoped>
+  .InputBox {
+    
+    position: relative;
+    input{
+      width: 85%;
+      top: 0rpx;
+      position: absolute;
+      border-radius: 15rpx;
+      font-size: 32rpx;
+      height: 70rpx;
+      padding-left: 65rpx;
+      margin:20rpx;
+      background-color: white;
+    }
+    .searchIcon{
+      position: absolute;
+      left: 35rpx;
+      top: 35rpx;
+      z-index: 2;
+    }
+  }
+</style>
+<template>
+  <view class="InputBox">
+    <icon type="search" class="searchIcon" size="20"></icon>
+    <input type="text" bindinput="search" placeholder="{{tips}}" focus="{{focus}}"/>
+    
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  export default class Input extends wepy.component {
+
+    data = {
+      serachtimer:null,
+    }
+    props = {
+      tips:{
+        type:String,
+        default:'搜索'
+      },
+      focus:{
+        type:Boolean,
+        default:true
+      }
+    };
+    events = {
+
+    }
+
+    methods = {
+      search(e){
+        let _self = this;
+        // 输入完成后执行$emit
+        clearTimeout(_self.serachtimer);
+        this.serachtimer=setTimeout(()=>{
+          this.$emit('searchVal',e.detail.value);
+        },1000)
+        
+      }
+    }
+    onLoad(){
+      
+    }
+  }
+</script>

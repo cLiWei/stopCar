@@ -1,0 +1,165 @@
+<style lang="less" scoped>
+  .header{
+      overflow: hidden;
+      height: 430rpx;
+      width: 100%;
+      position: relative;
+      font-size: 30rpx;
+      .img{
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+      }
+      
+      .headBox{
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 2;
+      }
+      .logoImg{
+        text-align: center;
+        image{
+          width: 120rpx;
+          padding-top:20rpx;
+        }
+      }
+      .place{
+        display: inline-block;
+        width: 150rpx;
+        text-align: center;
+        color: white;
+        padding:10rpx 20rpx;
+        background: rgba(0,0,0,0.8);
+        border-radius: 10rpx; 
+        margin-left: 40rpx;
+        image{
+          width: 40rpx;
+        }
+      }
+     
+      .ev{
+        color: white;
+        margin:0 auto;
+        margin-top: 20rpx;
+        width: 85%;
+        height: 180rpx;
+        padding:10rpx 20rpx;
+        background: rgba(0,0,0,0.4);
+        border-radius: 10rpx;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .pd{
+          padding:15rpx;
+        }
+        .wdBox,.pmBox{
+          flex: 1;
+          text-align: center;
+          .fs{
+            font-weight: bold;
+            font-size: 40rpx;
+            margin-right: 10rpx;
+          }
+        }
+        .order{
+          flex:1;
+          width: 200rpx;
+          height: 80rpx;
+          background-color: green;
+          text-align: center;
+          line-height: 80rpx;
+          font-size: 40rpx;
+          border-radius: 15rpx;
+        }
+        .numTip{
+          display: inline-block;
+          background-color: green;
+          width: 100rpx;
+          height: 40rpx;
+        }
+      }
+  }
+</style>
+<template>
+  <view class="header">
+    <image src="img/bg.jpg" mode="widthFix" class="img"></image>
+
+    <view class="headBox">
+      <view class="logoImg">
+        <image src="img/logo.png"  mode="widthFix"></image>
+        <image src="img/name.png"  mode="widthFix"></image>
+      </view>
+
+      <view class="place" @tap="orderPlace">
+        琅环里<image src="img/order3.png"  mode="widthFix"></image>
+      </view>
+     
+      <view class="ev">
+        <view class="wdBox">
+          <view>
+            <text class="fs">{{temperature}}℃</text> <text >{{weather}}</text>
+          </view>
+          <view class="pd">
+            风力：{{windpower}}
+          </view>
+        </view>
+        <view class="order">
+          剩余总数：{{totalNum}}
+        </view>
+      </view>
+    </view> 
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import amapFile from '@/assets/js/amap-wx.js'
+  let myAmapFun = new amapFile.AMapWX({key:'841048ae6e858ce9f7330e31d72e3ec0'});
+  export default class homeHeader extends wepy.component {
+
+    data = {
+      city:'',            //当前城市
+      weather:'',         //当前城市天气
+      temperature:"0",     //现在温度
+      windpower:"0",          //风力
+      totalNum:"0"
+    }   
+    props = {
+      
+    };
+    events = {
+      // 获取天气数据
+      weather(data){
+        this.city = data.city;
+        this.weather=data.weather;
+        this.temperature=data.temperature;
+        this.windpower=data.windpower;
+        this.winddirection=data.winddirection;
+        this.humidity=data.humidity;
+        this.$apply();
+      },
+      totalCar(num){
+        this.totalNum = num;
+        this.$apply();
+      }
+    }
+
+    methods = {
+      orderPlace(){
+        wx.openLocation({
+          latitude:31.379732,
+          longitude:120.954067,
+          scale: 18,
+          name:"琅环里停车场-出入口"
+        })
+      }
+    }
+    
+   
+
+    onLoad() {
+      
+    }
+  }
+</script>

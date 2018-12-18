@@ -1,0 +1,176 @@
+<style src="@/assets/style/iconfont.css" lang="css" ></style>
+<style lang="less" scoped>
+ .flex_head{
+    display: flex;
+    flex-direction: row;
+    margin-top:-9rpx;
+ }
+ .flex-item{
+  flex-grow:1;
+ }
+ .button_select{
+    height:80rpx;
+    line-height:80rpx;
+ }
+ .keyword{
+    color:white;
+    font-size:60rpx;
+ }
+ .flex_middle{
+     display: flex;
+     flex-direction: row;
+  }
+ .flex-item-middle{
+    flex-grow:1;
+    margin:10px;
+    height:160rpx;
+    width:160rpx;
+    background-color:#9D9D9D;
+    display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+ }
+ .foot{
+ margin:15px;
+ font-size:35rpx;
+ }
+  .middle_3{
+    display: flex;
+    flex-direction: row;
+   }
+
+     .second{
+
+       display: flex;
+        padding-bottom:70rpx;
+       .secondChild{
+         flex: 1;
+         text-align: center;
+         margin:20rpx;
+         height: 240rpx;
+         border-radius: 10rpx;
+         view{
+           margin-top: 20rpx;
+         }
+         image{
+           margin-top: 30rpx;
+           width: 360rpx;
+
+         }
+       }
+       .dtdh{
+          font-color:black;
+          font-size:30rpx;
+       }
+     }
+     .green{
+     color:rgba(255, 255, 255, 0.6);
+     background-color:#1296db;
+     }
+</style>
+<template>
+
+      <image src="img/gs.png" mode="widthFix" style="width:100%"></image>
+
+  <view class="flex_head">
+      <view class="flex-item"><button class="button_select" @tap="topClick(1)" :class="{ green: blue1 }">琅环里</button></view>
+      <view class="flex-item"><button class="button_select" @tap="topClick(2)" :class="{ green: blue2 }">人车位集成</button></view>
+      <view class="flex-item"><button class="button_select" @tap="topClick(3)" :class="{ green: blue3 }">星星充电</button></view>
+  </view>
+  <view wx-if="{{flag_a}}">
+    <view class="flex_middle">
+        <view class="flex-item-middle">
+          <view class="keyword">
+            <text>时尚\n设计</text>
+          </view>
+        </view>
+         <view class="flex-item-middle">
+           <view class="keyword">
+            <text>时尚\n设计</text>
+           </view>
+         </view>
+         <view class="flex-item-middle">
+           <view class="keyword">
+             <text>时尚\n设计</text>
+           </view>
+         </view>
+         <view class="flex-item-middle">
+           <view class="keyword">
+               <text>时尚\n设计</text>
+           </view>
+         </view>
+    </view>
+  <view class="foot">
+    <text space='nbsp'>      琅环里智能停车楼是昆山市政府为民办实事的重点工程，中泰天合停车产业（昆山）有限公司投资建设，停车楼采用江苏中泰停车产业有限公司“四高”机器人车库技术，楼内设置236个机械停车位，路面设置18个停车位，共254个停车位，并配有充电桩。该项目是住房和城乡建设部2017年度科技示范项目，具有高可靠性、高舒适度、高效率、高密度、智慧化程度高等特点。</text>
+  </view>
+  </view>
+
+  <view wx-if="{{flag_b}}">
+    人车位集成一体化
+  </view>
+
+  <view wx-if="{{flag_b}}">
+    <view class="second" >
+          <view class="secondChild dtdh">
+           <image src="img/xinxin.png" mode="widthFix" style="border:5px solid #ADADAD"></image>
+          </view>
+          <view class="secondChild dtdh">
+            <view>即插即充，无需任何其他操作。随车携带，随时随地充电，具有防雷、过载、短路、漏电保护，防水防尘等级达到IP66,适用于市面上大部分纯电动、混动车型。</view>
+          </view>
+        </view>
+    <view class="second" >
+       <view class="secondChild dtdh">
+         <view>具备恒流恒压充电功能，具备输入欠压、输入过压、输出短路、输出过压、输出过流、电池反接、绝缘检测、通讯故障等保护功能。外部装有运行指示灯，能够实时显示充电状态。</view>
+       </view>
+        <view class="secondChild dtdh" >
+                <image src="img/xinxin2.png" mode="widthFix" style="border:5px solid #ADADAD"></image>
+        </view>
+    </view>
+  </view>
+
+
+
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import moduleA from 'module-a' // aliasFields ignore module example
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+  import amapFile from '@/assets/js/amap-wx.js'
+  console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
+
+  let myAmapFun = new amapFile.AMapWX({key:'841048ae6e858ce9f7330e31d72e3ec0'});
+  export default class lhl extends wepy.page {
+    data = {
+          flag_a:true,
+          flag_b:false,
+          flag_c:false,
+          blue1:true,
+          blue2:false,
+          blue3:false,
+        }
+    config = {
+      navigationBarTitleText: '琅环里',
+      // enablePullDownRefresh:true
+    }
+    components = {
+     //导入组件在这里配置
+    }
+
+    mixins = [testMixin]
+    methods={
+        topClick:function(sel){
+        if(1 == sel){this.flag_a=true;this.flag_b=false;this.flag_c=false;this.blue1=true;this.blue2=false;this.blue3=false;}
+         else if(2 == sel){this.flag_a=false;this.flag_b=true;this.flag_c=false;this.blue1=false;this.blue2=true;this.blue3=false;}
+          else if(3 == sel){this.flag_a=false;this.flag_b=false;this.flag_c=true;this.blue1=false;this.blue2=false;this.blue3=true;}
+          this.$apply();
+        }
+    }
+    onLoad() {
+
+    }
+  }
+</script>

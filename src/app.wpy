@@ -1,0 +1,104 @@
+<style lang="less">
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+page{
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+}
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/home',
+      'pages/main/video',
+      'pages/lhl',
+      'pages/zt',
+      
+    ],
+    "tabBar": {  
+      "color": "#8a8a8a",  
+      "selectedColor": "#1296db",  
+      "borderStyle": "black" ,
+      "list": [{  
+        "selectedIconPath": "assets/icons/stealth_fill.png",  
+        "iconPath": "assets/icons/stealth.png",  
+        "pagePath": "pages/home",  
+        "text": "首页"  
+      },{  
+        "selectedIconPath": "assets/icons/el-active.png",  
+        "iconPath": "assets/icons/el.png",  
+        "pagePath": "pages/lhl",  
+        "text": "琅环里"  
+      },{  
+        "selectedIconPath": "assets/icons/gongsi-active.png",  
+        "iconPath": "assets/icons/gongsi-.png",  
+        "pagePath": "pages/zt",  
+        "text": "关于中泰"  
+      },{  
+        "selectedIconPath": "assets/icons/shop-active.png",  
+        "iconPath": "assets/icons/shop.png",  
+        "pagePath": "pages/home",  
+        "text": "车友之家"  
+      }] 
+    }, 
+    window: {
+      backgroundTextStyle: 'dark',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: 'WeChat',
+      navigationBarTextStyle: 'black',
+    },
+  }
+
+  globalData = {
+    userInfo: null
+  }
+
+  constructor () {
+    super()
+    this.use('requestfix')
+  }
+
+  onLaunch() {
+    // this.testAsync()
+  }
+
+  // sleep (s) {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve('promise resolved')
+  //     }, s * 1000)
+  //   })
+  // }
+
+  // async testAsync () {
+  //   const data = await this.sleep(3)
+  //   console.log(data)
+  // }
+
+  getUserInfo(cb) {
+    const that = this
+    if (this.globalData.userInfo) {
+      return this.globalData.userInfo
+    }
+    wepy.getUserInfo({
+      success (res) {
+        that.globalData.userInfo = res.userInfo
+        cb && cb(res.userInfo)
+      }
+    })
+  }
+}
+</script>

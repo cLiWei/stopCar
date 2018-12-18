@@ -1,0 +1,137 @@
+<style lang="less" scoped>
+  .first{
+    color: white;
+    display: flex;
+     margin: 20rpx;
+    .firstChild{
+      flex: 1;
+      text-align: center;
+      background: #40C2CD;
+      margin:5rpx;
+      height: 270rpx;
+      border-radius: 10rpx;
+      font-size: 30rpx;
+      view{
+        margin-top: 20rpx;
+      }
+      image{
+        margin-top: 20rpx;
+        width: 80rpx;
+      }
+    }
+    .bStop{
+      background-color: #6eaded;
+    }
+    .cStop{
+      background-color: #ff9d3c;
+    }
+  }
+  .second{
+    color: white;
+    display: flex;
+
+    .secondChild{
+      flex: 1;
+      text-align: center;
+      background: #448DE0;
+      margin:20rpx;
+      height: 240rpx;
+
+      
+      border-radius: 10rpx;
+      view{
+        margin-top: 20rpx;
+      }
+      image{
+        margin-top: 30rpx;
+        width: 80rpx;
+      }
+    }
+    .dtdh{
+      background-color: #448DE0;
+    }
+  }
+</style>
+<template>
+  <view class="first">
+    <view class="firstChild" >
+      <image src="img/a.png" mode="widthFix"></image>
+      <view>矮车车位:{{aLowCar}}</view>
+      <view>高车车位:{{aHeightCar}}</view>
+    </view>
+    <view class="firstChild bStop">
+     <image src="img/b.png" mode="widthFix"></image>
+      <view>矮车车位:{{bLowCar}}</view>
+      <view>高车车位:{{bHeightCar}}</view>
+    </view>
+    <view class="firstChild cStop">
+      <image src="img/c.png" mode="widthFix"></image>
+      <view>矮车车位:{{cLowCar}}</view>
+      <view>高车车位:{{cHeightCar}}</view>
+    </view>
+  </view>
+  <view class="second" >
+    <view class="secondChild " @tap="touchBox(1)">
+      <image src="img/video.png" mode="widthFix"></image>
+      <view>停车演示</view>
+    </view>
+    <view class="secondChild dtdh" @tap="touchBox(2)">
+      <image src="img/saoma.png" mode="widthFix"></image>
+      <view>扫码取车</view>
+    </view>
+  </view>
+     
+</template>
+<script>
+  import wepy from 'wepy'
+  
+  export default class homeHeader extends wepy.component {
+
+    data = {
+      aLowCar:"0",
+      bLowCar:"0",
+      cLowCar:"0",
+      aHeightCar:"0",
+      bHeightCar:"0",
+      cHeightCar:"0",
+    }   
+    props = {
+      
+    };
+    events = {
+      carNews(data){
+        let {A,B,C} = data;
+        this.aLowCar = A.lowCar;
+        this.bLowCar = B.lowCar;
+        this.cLowCar = C.lowCar;
+        this.aHeightCar = A.heightCar;
+        this.bHeightCar = B.heightCar;
+        this.cHeightCar = C.heightCar;
+        this.$apply();
+      }
+    }
+
+    methods = {
+      touchBox(num){
+        let pageUrl ="";
+        switch(num){
+          case "1":
+            pageUrl="video"; break;
+          case "2":
+            pageUrl="video"; break;
+          default: break;
+        }
+        wx.navigateTo({
+          url:"main/"+pageUrl
+        })
+      }
+    }
+    
+    
+   
+
+    onLoad() {
+      
+    }
+  }
+</script>

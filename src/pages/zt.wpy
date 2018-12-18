@@ -1,0 +1,243 @@
+<style src="@/assets/style/iconfont.css" lang="css" ></style>
+<style lang="less" scoped>
+ .flex_head{
+    display: flex;
+    flex-direction: row;
+    margin-top:-9rpx;
+ }
+ .flex-item{
+  flex-grow:1;
+ }
+ .button_select{
+    height:80rpx;
+    line-height:80rpx;
+ }
+ .keyword{
+    color:white;
+    font-size:60rpx;
+ }
+ .flex_middle{
+display: flex;
+     flex-direction: row;
+  }
+ .flex-item-middle{
+    flex-grow:1;
+    margin:10px;
+    height:160rpx;
+    width:160rpx;
+    background-color:#9D9D9D;
+    display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+ }
+ .foot{
+ margin:15px;
+ font-size:35rpx;
+ }
+  .middle_3{
+    display: flex;
+    flex-direction: row;
+   }
+
+     .second{
+
+       display: flex;
+        padding-bottom:70rpx;
+       .secondChild{
+         flex: 1;
+         text-align: center;
+         margin:20rpx;
+         height: 240rpx;
+         border-radius: 10rpx;
+         view{
+           margin-top: 20rpx;
+         }
+         image{
+           margin-top: 30rpx;
+           width: 360rpx;
+
+         }
+       }
+       .dtdh{
+          font-color:black;
+          font-size:30rpx;
+       }
+     }
+     .green{
+     color:rgba(255, 255, 255, 0.6);
+     background-color:#1296db;
+     }
+     .v-a{ position:absolute;left:26rpx;margin-top:8rpx;z-index:80;background:#F00;width:340rpx;height:190rpx}
+
+     .v-b{ position:absolute;left:53rpx;margin-top:20rpx;z-index:100;width:400px;height:200rpx}
+
+     .v-c{ position:absolute;left:476rpx;margin-top:141rpx;z-index:70;background:#00F;width:252rpx;height:205rpx}
+     .intro{
+      padding-top:335rpx;
+       margin:15px;
+       font-size:35rpx;
+     }
+     .connect{
+     display: flex;
+     background-color:rgb(40, 153, 210);
+     height:230rpx;
+     margin-top:0rpx;
+
+     }
+     .connect_child{
+
+      margin:20rpx;
+      margin-left:30rpx;
+      text{
+      color:white;
+      font-size:30rpx;
+      line-height:10rpx;
+      margin-left:20rpx;
+      }
+     }
+     .con_title{
+     font-size:40rpx;
+     color:#7B7B7B;
+     margin:20rpx;
+     }
+     .divLine{
+      background: #0080FF;
+      width: 95%;
+      height: 8rpx;
+      margin:15rpx;
+     }
+     .map{
+     height:245rpx;
+     }
+     .zongzhi{
+     font-size:40rpx;
+     font-weight:700;
+     text-align:center;
+     padding-top:20rpx;
+     }
+</style>
+<template>
+
+      <image src="img/gs.png" mode="widthFix" style="width:100%"></image>
+
+  <view class="flex_head">
+      <view class="flex-item"><button class="button_select" @tap="topClick(1)" :class="{ green: blue1 }">关于中泰</button></view>
+      <view class="flex-item"><button class="button_select" @tap="topClick(2)" :class="{ green: blue2 }">停车设备</button></view>
+      <view class="flex-item"><button class="button_select" @tap="topClick(3)" :class="{ green: blue3 }">联系我们</button></view>
+  </view>
+
+
+  <view wx-if="{{flag_a}}">
+ <view class="zongzhi">停车让城市生活更美好</view>
+  <view>
+    <!--<view class="v-a"></view>-->
+      <view class="v-b"> <image src="img/gs.png" mode="widthFix" style="width:650rpx;border:5px solid #ADADAD"></image></view>
+      <!-- <view class="v-c"></view>-->
+  </view>
+  <view class="intro"><text space='nbsp'>      江苏中泰停车产业有限公司，国家高新技术企业，是中国停车综合服务行业的开拓者与领导者，公司依靠自主创新研发的“高可靠性、高舒适度、高效率、高密度”四高智能机器人车库系列产品成为国内高端智能车库行业的领军企业，公司承担了国家“十三五”重点研发计划停车设施升级改造关键技术研究与示范课题。</text></view>
+  </view>
+
+
+  <view wx-if="{{flag_b}}">
+    <view class="second" >
+          <view class="secondChild dtdh">
+           <image src="img/xinxin.png" mode="widthFix" style="border:5px solid #ADADAD"></image>
+          </view>
+          <view class="secondChild dtdh">
+            <view>即插即充，无需任何其他操作。随车携带，随时随地充电，具有防雷、过载、短路、漏电保护，防水防尘等级达到IP66,适用于市面上大部分纯电动、混动车型。</view>
+          </view>
+        </view>
+    <view class="second" >
+       <view class="secondChild dtdh">
+         <view>具备恒流恒压充电功能，具备输入欠压、输入过压、输出短路、输出过压、输出过流、电池反接、绝缘检测、通讯故障等保护功能。外部装有运行指示灯，能够实时显示充电状态。</view>
+       </view>
+        <view class="secondChild dtdh" >
+                <image src="img/xinxin2.png" mode="widthFix" style="border:5px solid #ADADAD"></image>
+        </view>
+    </view>
+  </view>
+
+
+
+
+  <view wx-if="{{flag_c}}">
+      <view class="con_title"><text>联系我们\n</text><text>CONTENT US</text></view>
+     <view class="divLine"></view>
+      <map
+        id="map"
+        latitude="31.379732"
+        longitude="120.954067"
+        scale="13"
+        markers="{{markers}}"
+        show-location
+        style="width: 90%; height: 300rpx;margin:20rpx auto;border:5px solid #ADADAD"
+      ></map>
+     <view class="connect">
+      <view class="connect_child"> <image src="img/ewm.png" mode="widthFix" style="width:150rpx;margin-top:20rpx;"></image></view>
+      <view class="connect_child" style="height:180rpx; width:10rpx; border-left:5rpx #000 solid;"></view>
+      <view class="connect_child" style="margin-top:30rpx;">
+          <view @tap="makecall"><image src="img/phone.png" mode="widthFix" style="width:50rpx;"></image><text>0519-86865652</text></view>
+          <view><image src="img/email.png" mode="widthFix" style="width:50rpx;"></image><text>****@sina.com</text></view>
+          <view><image src="img/ie.png" mode="widthFix" style="width:50rpx;"></image><text>www.baidu.com</text></view>
+      </view>
+     </view>
+  </view>
+
+
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import moduleA from 'module-a' // aliasFields ignore module example
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+  import amapFile from '@/assets/js/amap-wx.js'
+  console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
+
+  let myAmapFun = new amapFile.AMapWX({key:'841048ae6e858ce9f7330e31d72e3ec0'});
+  export default class zt extends wepy.page {
+    data = {
+          flag_a:true,
+          flag_b:false,
+          flag_c:false,
+          blue1:true,
+          blue2:false,
+          blue3:false,
+          markers: [{
+                iconPath: '/assets/icons/biaoji.png',
+                id: 0,
+                latitude:31.379732,
+                longitude:120.954067,
+                width: 50,
+                height: 50
+              }],
+        }
+    config = {
+      navigationBarTitleText: '琅环里',
+      // enablePullDownRefresh:true
+    }
+    components = {
+     //导入组件在这里配置
+    }
+
+    mixins = [testMixin]
+    methods={
+        topClick:function(sel){
+        if(1 == sel){this.flag_a=true;this.flag_b=false;this.flag_c=false;this.blue1=true;this.blue2=false;this.blue3=false;}
+         else if(2 == sel){this.flag_a=false;this.flag_b=true;this.flag_c=false;this.blue1=false;this.blue2=true;this.blue3=false;}
+          else if(3 == sel){this.flag_a=false;this.flag_b=false;this.flag_c=true;this.blue1=false;this.blue2=false;this.blue3=true;}
+          this.$apply();
+        },
+        makecall(){
+          wx.makePhoneCall({
+            phoneNumber: "0519123456" // 仅为示例，并非真实的电话号码
+          })
+        }
+    }
+    onLoad() {
+
+    }
+  }
+</script>

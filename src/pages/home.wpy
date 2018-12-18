@@ -1,0 +1,134 @@
+<style src="@/assets/style/iconfont.css" lang="css" ></style>
+<style lang="less">
+  .reload{
+    height: 60rpx;
+    width: 100%;
+    image{
+      margin:10rpx;
+      float: right;
+      width: 60rpx;
+    }
+  }
+</style>
+<template>
+  <homeHead></homeHead>
+  <view class="reload">
+    <image src="img/reload.png" mode="widthFix" @tap="reload"></image>
+  </view>
+  <homeBody></homeBody>  
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import moduleA from 'module-a' // aliasFields ignore module example
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+  import amapFile from '@/assets/js/amap-wx.js'
+  
+  import homeHead from '@/components/home/head'
+  import homeBody from '@/components/home/body'
+  console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
+
+  let myAmapFun = new amapFile.AMapWX({key:'841048ae6e858ce9f7330e31d72e3ec0'});
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '首页',
+      // enablePullDownRefresh:true
+    }
+    components = {
+     homeHead,
+     homeBody
+    }
+
+    mixins = [testMixin]
+    methods={
+      reload(){
+        this.userLocation(); 
+      }
+    }
+    async reloadFun(){
+      // 获取天气
+      await this.getWeather();
+      // 获取车位信息
+      await this.getCarNews();
+      
+    }
+    // 获取天气
+    getWeather(){
+      this.showLoad();
+      let _self = this;
+      myAmapFun.getWeather({
+        success: function(data){
+          let nowdata = data.liveData
+          _self.$broadcast('weather',nowdata);
+        },
+        fail: function(info){
+          //失败回调
+          console.log(info)
+        }
+      })
+    }
+    // 获取车位信息
+    getCarNews(){
+      let totalCar = "199";
+      let data = {
+        A:{
+          lowCar:"123",
+          heightCar:"100"
+        },
+        B:{
+          lowCar:"111",
+          heightCar:"110"
+        },
+        C:{
+          lowCar:"122",
+          heightCar:"102"
+        }
+      }
+      this.$broadcast("totalCar",totalCar);
+      this.$broadcast("carNews",data);
+      this.hideLoad();
+    }
+    // 下拉刷新
+    // onPullDownRefresh(){
+    //   this.getWeather();
+    //   wx.stopPullDownRefresh();
+    // }
+    
+    // 获取是否授权位置信息
+    userLocation(){
+      let _self = this;
+      wx.authorize({
+        scope:"scope.userLocation",
+        success(res){
+          _self.reloadFun();
+        },
+        fail(res){
+          _self.tips();
+        }
+      })
+    }
+    // 未获取到的提示以及打开授权
+    tips(){
+      this.openDialog({
+        content:"当前小程序需要获取位置信息",
+        confirm(){
+          wx.openSetting({
+            success(res){
+              console.log(res)
+            }
+          })
+        },
+        cancel(){
+         
+        }
+      })
+    }
+    onShow(){
+     
+    }
+    onLoad() {
+      this.userLocation()
+    }
+  }
+</script>
