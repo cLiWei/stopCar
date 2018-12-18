@@ -17,7 +17,7 @@
     font-size:60rpx;
  }
  .flex_middle{
-display: flex;
+  display: flex;
      flex-direction: row;
   }
  .flex-item-middle{
@@ -215,7 +215,7 @@ display: flex;
               }],
         }
     config = {
-      navigationBarTitleText: '琅环里',
+      navigationBarTitleText: '中泰',
       // enablePullDownRefresh:true
     }
     components = {

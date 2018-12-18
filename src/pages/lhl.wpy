@@ -111,7 +111,7 @@
     人车位集成一体化
   </view>
 
-  <view wx-if="{{flag_b}}">
+  <view wx-if="{{flag_c}}">
     <view class="second" >
           <view class="secondChild dtdh">
            <image src="img/xinxin.png" mode="widthFix" style="border:5px solid #ADADAD"></image>

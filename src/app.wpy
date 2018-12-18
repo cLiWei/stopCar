@@ -26,7 +26,7 @@ export default class extends wepy.app {
       'pages/main/video',
       'pages/lhl',
       'pages/zt',
-      
+      'pages/shop',
     ],
     "tabBar": {  
       "color": "#8a8a8a",  
@@ -50,7 +50,7 @@ export default class extends wepy.app {
       },{  
         "selectedIconPath": "assets/icons/shop-active.png",  
         "iconPath": "assets/icons/shop.png",  
-        "pagePath": "pages/home",  
+        "pagePath": "pages/shop",  
         "text": "车友之家"  
       }] 
     }, 
